@@ -1,3 +1,5 @@
+import java.util.Queue;
+
 public interface IRoom {
 
     //adopting random animal
