@@ -1,4 +1,4 @@
-import java.util.Queue;
+//IRoom Interface
 
 public interface IRoom {
 

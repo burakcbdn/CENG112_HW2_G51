@@ -1,3 +1,5 @@
+//Room Class
+
 public class Room implements IRoom {
 
     IQueue<String> dogQueue = new IQueue<>();
@@ -55,6 +57,7 @@ public class Room implements IRoom {
         }
     }
 
+    //feeds animals
     public boolean feed() {
         if (mealQueue.dequeue() == null) {
             return false;
@@ -64,6 +67,7 @@ public class Room implements IRoom {
         }
     }
 
+    //adds new meal
     public boolean addMeal(String meal) {
         if (mealQueue.enqueue(meal)) {
             return true;
@@ -72,16 +76,78 @@ public class Room implements IRoom {
         }
     }
 
-    public void operate(String user, String operation) {
-        switch (user) {
+    //makes operations
+    public void operate(Operation op) {
+        String operator = op.getOperator();
+        String operation = op.getOperation();
+
+        switch (operator) {
+
             case "donor":
-                System.out.println("Donor" + operation);
+                if (addMeal(operation)) {
+                    System.out.println("Donors tries to donate: SUCCESS.");
+                } else {
+                    System.out.println("Donors tries to donate: FAIL.");
+                }
                 break;
+
             case "caregiver":
+                if (feed()) {
+                    System.out.println("CareGiver tries to feed the animals: SUCCESS.");
+                } else {
+                    System.out.println("CareGiver tries to feed the animals: FAIL.");
+                }
                 break;
-            case "rescuer":
-                break;
+
             case "animalcontrol":
+                switch (operation) {
+
+                    case "dog":
+                        if (enqueueDog()) {
+                            System.out.println("AnimalControl tries to bring new animals: SUCCESS.");
+                        } else {
+                            System.out.println("AnimalControl tries to bring new animals: FAIL.");
+                        }
+                        break;
+
+                    case "cat":
+                        if (enqueueCat()) {
+                            System.out.println("AnimalControl tries to bring new animals: SUCCESS.");
+                        } else {
+                            System.out.println("AnimalControl tries to bring new animals: FAIL.");
+                        }
+                        break;
+
+                }
+                break;
+
+            case "rescuer":
+                switch (operation) {
+
+                    case "dog":
+                        if (dequeueDog()) {
+                            System.out.println("Rescuer tries to adopt a dog: SUCCESS.");
+                        } else {
+                            System.out.println("Rescuer tries to adopt a dog: FAIL.");
+                        }
+                        break;
+
+                    case "cat":
+                        if (dequeueCat()) {
+                            System.out.println("Rescuer tries to adopt a cat: SUCCESS.");
+                        } else {
+                            System.out.println("Rescuer tries to adopt a cat: FAIL.");
+                        }
+                        break;
+
+                    case "any":
+                        if (dequeueAny()) {
+                            System.out.println("Rescuer tries to adopt any animal: SUCCESS.");
+                        } else {
+                            System.out.println("Rescuer tries to adopt any animal: FAIL.");
+                        }
+                        break;
+                }
                 break;
         }
     }

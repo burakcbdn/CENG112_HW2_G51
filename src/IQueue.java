@@ -1,4 +1,4 @@
-import java.util.Queue;
+//Queue Class
 
 public class IQueue<T> implements QueueInterface<T> {
 
@@ -8,7 +8,7 @@ public class IQueue<T> implements QueueInterface<T> {
     private int backIndex;
     private static final int CAPACITY = 10;
 
-
+    //Constructing queue
     public IQueue(){
         @SuppressWarnings("unchecked")
         T[] tempQueue = (T[]) new Object[CAPACITY + 1];
@@ -46,7 +46,6 @@ public class IQueue<T> implements QueueInterface<T> {
     @Override
     public T dequeue() {
         if (isEmpty()) {
-            System.out.println("This queue is empty");
             return null;
         } else {
             T front = queue[frontIndex];

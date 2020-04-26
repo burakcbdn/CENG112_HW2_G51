@@ -1,3 +1,5 @@
+//Class for making operating easier
+
 public class Operation {
 
     private String operator;
