@@ -1,5 +1,10 @@
+import java.util.Queue;
+
 public class Room implements IRoom {
 
+    AnimalQueue<String> dogQueue = new AnimalQueue<>();
+    AnimalQueue<String> catQueue = new AnimalQueue<>();
+    AnimalQueue<String> bothQueue = new AnimalQueue<>();
 
     @Override
     public boolean dequeueAny() {
