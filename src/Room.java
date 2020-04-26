@@ -1,37 +1,78 @@
-import java.util.Queue;
-
 public class Room implements IRoom {
 
-    AnimalQueue<String> dogQueue = new AnimalQueue<>();
-    AnimalQueue<String> catQueue = new AnimalQueue<>();
-    AnimalQueue<String> bothQueue = new AnimalQueue<>();
+    IQueue<String> dogQueue = new IQueue<>();
+    IQueue<String> catQueue = new IQueue<>();
+    IQueue<String> bothQueue = new IQueue<>();
+    IQueue<String> mealQueue = new IQueue<>();
 
     @Override
     public boolean dequeueAny() {
-        return false;
+        if (bothQueue.dequeue() == null) {
+            return false;
+        } else {
+            bothQueue.dequeue();
+            return true;
+        }
     }
 
     @Override
     public boolean dequeueDog() {
-        return false;
+        if (dogQueue.dequeue() == null) {
+            return false;
+        } else {
+            dogQueue.dequeue();
+            return true;
+        }
     }
 
     @Override
     public boolean dequeueCat() {
-        return false;
+        if (catQueue.dequeue() == null) {
+            return false;
+        } else {
+            catQueue.dequeue();
+            return true;
+        }
     }
 
     @Override
     public boolean enqueueDog() {
-        return false;
+        if (dogQueue.enqueue("Dog")) {
+            bothQueue.enqueue("Dog");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean enqueueCat() {
-        return false;
+        if (catQueue.enqueue("Cat")) {
+            bothQueue.enqueue("Cat");
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void operate(String user, String operation){
+    public boolean feed() {
+        if (mealQueue.dequeue() == null) {
+            return false;
+        } else {
+            mealQueue.dequeue();
+            return true;
+        }
+    }
+
+    public boolean addMeal(String meal) {
+        if (mealQueue.enqueue(meal)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void operate(String user, String operation) {
         switch (user) {
             case "donor":
                 System.out.println("Donor" + operation);
