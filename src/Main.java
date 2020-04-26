@@ -2,7 +2,9 @@
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.util.List;
 
 
 public class Main {
@@ -14,7 +16,8 @@ public class Main {
             Room room = new Room();
 
             //getting all lines from file.
-            String[] lines = Files.readString(Path.of("src/instructions.txt")).split("\n");
+            Path path = Paths.get("src/instructions.txt");
+            List<String> lines = Files.readAllLines(path);
             for (String line : lines) {
                 if (line != null) {
 
@@ -32,6 +35,8 @@ public class Main {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }catch (ArrayIndexOutOfBoundsException ignored) {
+
         }
     }
 }
